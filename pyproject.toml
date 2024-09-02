@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "bsl-track-server"
+version = "0.1.0"
+description = ""
+authors = ["Jath Palasubramaniam <jathpala@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.112.2"
+fastapi-cli = "^0.0.5"
+uvicorn = {extras = ["standard"], version = "^0.30.6"}
+sqlalchemy = "^2.0.32"
+alembic = "^1.13.2"
+pydantic-settings = "^2.4.0"
+python-dotenv = "^1.0.1"
+taskipy = "^1.13.0"
+pyyaml = "^6.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+dev = "fastapi dev bsl_track_server"
