@@ -18,7 +18,7 @@ handlers:
         maxBytes: 10000
         backupCount: 3
 loggers:
-    kubera_server:
+    bsl_track_server:
         level: DEBUG
         handlers:
             - stderr

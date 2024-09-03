@@ -11,7 +11,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, ConfigDict, condecimal
 from sqlalchemy import Integer, Enum as SaEnum, select, delete, DECIMAL, Date, Time, func
-from sqlalchemy.orm import Session, Mapped, mapped_column
+from sqlalchemy.orm import Session, Mapped, mapped_column, validates
 
 from bsl_track_server.database import OrmBase, get_db, DatabaseError
 from bsl_track_server.logging import get_logger
@@ -37,7 +37,7 @@ class BslMeasurementSchema(BaseModel):
 
     id: int | None = None
     bsl: Annotated[Decimal, condecimal(ge=0, le=100, multiple_of=Decimal(0.1), decimal_places=1, allow_inf_nan=False)]
-    type: MeasurementTypes = MeasurementTypes.FASTING
+    # type: MeasurementTypes = MeasurementTypes.FASTING
     date: datetime.date
     time: datetime.time
 
@@ -55,7 +55,7 @@ class BslMeasurementModel(OrmBase):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     bsl: Mapped[Decimal] = mapped_column(DECIMAL(scale=1), nullable=False)
-    type: Mapped[MeasurementTypes] = mapped_column(SaEnum(MeasurementTypes), nullable=False)
+    # type: Mapped[MeasurementTypes] = mapped_column(SaEnum(MeasurementTypes), nullable=False)
     date: Mapped[datetime.date] = mapped_column(Date, nullable=False, server_default=func.current_date())
     time: Mapped[datetime.time] = mapped_column(Time, nullable=False, server_default=func.current_time())
 
